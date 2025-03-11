@@ -9,7 +9,31 @@ This repository contains an Azure Function app built with .NET 8.0. The function
 - An active Azure subscription
 - [Auth0 account](https://auth0.com/) for authentication setup
 - To run locally you would also require Azure Functions Core Tools
+- Via Postman receive an access token via the url: POST https://dev-ze2w21csgte1mgsi.us.auth0.com/oauth/token
+- For the purposes of the test the following body can be passed to the URL
+- {
+    "client_id" : "hS281NBGBURHXmtl6ftKqBHSqjGdGeFp",
+    "client_secret" : "76aBCnN-gMKdBoYqrLqw7KNd9Z4PRCQzmUoU-sM-TiRFcZKFQ-v9pPEoQFDnzcAK",
+    "grant_type" : "password",
+    "audience" : "https://sandfordtest/",
+    "username" : "sanford@test.com",
+    "password" : "Test!12345"
+}
 
+The endpoint should provide an access token that can be used to access the function app via http://localhost:7071/api/DispatchFunction
+set the authorisation header as bearer token.
+
+ensure the local.settings.json is correct below:
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "MaxRequestBodySize": "819200",
+    "Auth0:Domain": "https://dev-ze2w21csgte1mgsi.us.auth0.com/",
+    "Auth0:ApiIdentifier": "https://sandfordtest/"
+  }
+}
 
 ## Architecture Overview: Azure Function App, Blob Storage, and Logic Apps Integration
 This architecture involves an Azure Function App that processes a payload, converts it to CSV format, uploads the CSV to Blob Storage, and then triggers a 

@@ -8,11 +8,13 @@ namespace SanfordTest.Models
 {
     public class ReadyForDispatch
     {
+        [Required]
         [JsonProperty("controlNumber")]
-        public required int ControlNumber { get; set; }
+        public int ControlNumber { get; set; }
 
+        [Required]
         [JsonProperty("salesOrder")]
-        public required string SalesOrder { get; set; }
+        public string SalesOrder { get; set; }
 
         [Required]
         [JsonProperty("containers")]
@@ -26,7 +28,6 @@ namespace SanfordTest.Models
     public class Container
     {
         [Required]
-        [StringLength(50)] // Optional: You can set a length constraint for LoadId if needed
         [JsonProperty("loadId")]
         public string LoadId { get; set; }
 
@@ -43,7 +44,6 @@ namespace SanfordTest.Models
     public class Item
     {
         [Required]
-        [StringLength(50)] // Optional: You can set a length constraint for ItemCode if needed
         [JsonProperty("itemCode")]
         public string ItemCode { get; set; }
 
@@ -61,32 +61,31 @@ namespace SanfordTest.Models
     public class DeliveryAddress
     {
         [Required]
-        [StringLength(100)] // Optional: You can set a length constraint for Street if needed
+        [StringLength(100)] 
         [JsonProperty("street")]
         public string Street { get; set; }
 
         [Required]
-        [StringLength(50)] // Optional: You can set a length constraint for City if needed
+        [StringLength(50)] 
         [JsonProperty("city")]
         public string City { get; set; }
 
         [Required]
-        [StringLength(50)] // Optional: You can set a length constraint for State if needed
+        [StringLength(50)] 
         [JsonProperty("state")]
         public string State { get; set; }
 
         [Required]
-        [StringLength(20)] // Optional: You can set a length constraint for PostalCode if needed
+        [StringLength(20)] 
         [JsonProperty("postalCode")]
         public string PostalCode { get; set; }
 
         [Required]
-        [StringLength(50)] // Optional: You can set a length constraint for Country if needed
+        [StringLength(50)] 
         [JsonProperty("country")]
         public string Country { get; set; }
     }
 
-    // Enum for container types
     public enum ContainerType
     {
         [EnumMember(Value = "20RF")]
